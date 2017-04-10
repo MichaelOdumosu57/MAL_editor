@@ -35,15 +35,22 @@ int main(int args, char *argv[]) {   //calling files and options
       else {
           int x = 1;
           while (fgets(line, MAXLEN, finput) != NULL) {
-              
-              int length = snprintf( NULL, 0, "%d", x );
-              char* str = malloc( length + 1 );
-              snprintf( str, length + 1, "%d", x );
-              strcat(str , "  ");
-              strcat(str , line);
-              fputs(str, foutput);
-              x++;
-              free(str);
+              printf(" %d     %d\n",x,strlen(line));
+              if (strlen(line) != 1) {
+                
+                int length = snprintf( NULL, 0, "%d", x );
+                char* str = malloc( length + 1 );
+                snprintf( str, length + 1, "%d", x );
+                strcat(str , "  ");
+                strcat(str , line);
+                fputs(str, foutput);
+                x++;
+                free(str);
+                
+              }
+              else {
+                fputs(line, foutput);
+              }
           }
           
       }
