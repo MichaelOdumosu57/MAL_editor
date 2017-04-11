@@ -64,23 +64,30 @@ int main(int args, char *argv[]) {   //calling files and options
       fputs( "Cross Reference table\n", foutput);
       char * header = "     Identifier      Definition      Use";
       fputs(header,foutput);
-      int x =1;
+      int x =0;
         while (fgets(line, MAXLEN, finput) != NULL) {
             
             if (strlen(line) != 1) {
+              
+                x++;
           
                 if (line[0] != '#' && isspace(line[0])  == 0  ) {
                   //printf("%c\n", line[0]);
+                  char * info;
                   const char stop[2] =":";
                   char * token;
                   token = strtok(line,stop);
-                  
+                  strcat(info,token);
                   //while (token != NULL){
                   fputs("\n",foutput);
                   fputs("        ",foutput);
                   fputs(token,foutput);
-                  fputs("       ",foutput);
-                  fputs(x,foutput);
+                  fputs("             ",foutput);
+                  int length = snprintf( NULL, 0, "%d", x );
+                  char* str = malloc( length + 1 );
+                  snprintf( str, length + 1, "%d", x );
+                  fprintf(foutput,str,"%10s");
+                  free(str);
                 
                     //token = strtok(NULL, stop);
                   
