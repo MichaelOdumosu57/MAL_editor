@@ -14,28 +14,30 @@ int main(int args, char *argv[]) {   //calling files and options
     
     
     strcpy(flag,argv[1]);
-    if(strcmp(flag,"-l")== 0) {       //conditional to print number list
-      printf("%s\n", argv[1]);
-      printf("%s\n", argv[2]);
-      
-      if ((finput = fopen(argv[2], "r")) == NULL) {     //check statements for file handling
+    if ((finput = fopen(argv[2], "r")) == NULL) {     //check statements for file handling
         
         printf("Could not open file %s for reading.\n", argv[2]);
         exit(1);
         
       }
       
-      else if ((foutput = fopen(argv[3], "w")) == NULL) {
+    else if ((foutput = fopen(argv[3], "w")) == NULL) {
         
         printf("Could not open file %s for writing.\n", argv[3]);
         exit(1);
         
       }
       
-      else {
+      
+    if(strcmp(flag,"-l")== 0) {       //conditional to print number list
+      printf("%s\n", argv[1]);
+      printf("%s\n", argv[2]);
+      
+
+      
           int x = 1;
           while (fgets(line, MAXLEN, finput) != NULL) {
-              printf(" %d     %d\n",x,strlen(line));
+              //printf(" %d     %d\n",x,strlen(line));
               if (strlen(line) != 1) {
                 
                 int length = snprintf( NULL, 0, "%d", x );
@@ -51,7 +53,7 @@ int main(int args, char *argv[]) {   //calling files and options
               else {
                 fputs(line, foutput);
               }
-          }
+          
           
       }
       
@@ -59,8 +61,36 @@ int main(int args, char *argv[]) {   //calling files and options
     }
     
     else if(strcmp(flag,"-c")== 0) {
-      printf("%s\n", argv[1]);
+      fputs( "Cross Reference table\n", foutput);
+      char * header = "     Identifier      Definition      Use";
+      fputs(header,foutput);
+      int x =1;
+        while (fgets(line, MAXLEN, finput) != NULL) {
+            
+            if (strlen(line) != 1) {
+          
+                if (line[0] != '#' && isspace(line[0])  == 0  ) {
+                  //printf("%c\n", line[0]);
+                  const char stop[2] =":";
+                  char * token;
+                  token = strtok(line,stop);
+                  
+                  //while (token != NULL){
+                  fputs("\n",foutput);
+                  fputs("        ",foutput);
+                  fputs(token,foutput);
+                  fputs("       ",foutput);
+                  fputs(x,foutput);
+                
+                    //token = strtok(NULL, stop);
+                  
+                  //fputs(line,foutput);
+                }
+            }
+        }
     }
+      
+    
     
     else if(strcmp(flag,"-b")== 0) {
       printf("%s\n", argv[1]);

@@ -1,0 +1,11 @@
+Cross Reference table
+     Identifier      Definition      Use
+        avg
+        i1
+        i2
+        i3
+        prompt
+        nl
+        __start
+        i10
+        i20
