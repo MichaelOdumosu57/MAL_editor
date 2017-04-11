@@ -1,9 +1,9 @@
 #A sample MAL program.
               .data                        #Data segment begins here.
-avg:          .word                        #Will store the average. 
-i1:           .word       20               #First integer. 
-i2:           .word       13               #Second integer. 
-i3:           .word       82               #Third integer. 
+avg:          .word                        #Will store the average.
+i1:           .word       20               #First integer.
+i2:           .word       13               #Second integer.
+i3:           .word       82               #Third integer.
 prompt:       .asciiz     "Value is: "
 nl:           .byte       '\n'
 
@@ -20,8 +20,8 @@ i20:          sw          $15,avg          #Store the average.
               put         avg
               putc        nl
 
-              sw          $15,avg         
+              sw          $15,avg
               la          $16,i1
               sw          $15,0($16)
-              add         i3,i3,1         
+              add         i3,i3,1
               done                         #Similar to halt.

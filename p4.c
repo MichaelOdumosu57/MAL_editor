@@ -65,29 +65,72 @@ int main(int args, char *argv[]) {   //calling files and options
       char * header = "     Identifier      Definition      Use";
       fputs(header,foutput);
       int x =0;
+      char count[100][100];
+      char identifier[100][100];
+      int y =0;
+      int z =0;
+      
+        
+      
         while (fgets(line, MAXLEN, finput) != NULL) {
             
             if (strlen(line) != 1) {
               
                 x++;
+                char use[23];
+                if(isspace(line[27]) == 0){
+                  
+                  strncpy(use,  line + 26, 43 -26);
+                  int y = 0;
+                  while(use[y] != NULL) {
+                      count[x][y] = use[y];
+                      y++;
+                  }
+                  
+                  //printf("%s",count[x]);
+                  
+                }
           
                 if (line[0] != '#' && isspace(line[0])  == 0  ) {
                   //printf("%c\n", line[0]);
-                  char * info;
+                  
                   const char stop[2] =":";
                   char * token;
                   token = strtok(line,stop);
-                  strcat(info,token);
+                  
+                  y = 0;
+                  while(token[y] != NULL) {
+                      identifier[z][y] = token[y];
+                      y++;
+                      
+                  }
+                  z++;
+                  y = 0;
                   //while (token != NULL){
                   fputs("\n",foutput);
-                  fputs("        ",foutput);
+                  fputs("       ",foutput);
                   fputs(token,foutput);
-                  fputs("             ",foutput);
                   int length = snprintf( NULL, 0, "%d", x );
                   char* str = malloc( length + 1 );
                   snprintf( str, length + 1, "%d", x );
-                  fprintf(foutput,str,"%10s");
+                  int start = strlen(token) + 8;
+                  while(start != 26){
+                      fputs(" ",foutput);
+                      start++;
+                  }
+                  fputs(str,foutput);
                   free(str);
+                  //printf("%c\n",line[26]);
+
+
+                    //printf("%s",token);
+                    // if (strstr(use,token) ){
+                    //   strcat(count,str);
+                    //   }
+                    
+                
+                  
+                  
                 
                     //token = strtok(NULL, stop);
                   
@@ -95,8 +138,25 @@ int main(int args, char *argv[]) {   //calling files and options
                 }
             }
         }
+        int i = 0;
+        int w = 0;
+        while( i != 25) {
+          while (w != 9) {
+            if (strstr(count[i],identifier[w])) {
+               printf("%s index %d: line %d\n", identifier[w], w, i);
+            }
+            w++;
+          }
+          w =0;
+          i++;
+          }
+        
+        
+
+        //printf("%s\n",use);
     }
       
+    
     
     
     else if(strcmp(flag,"-b")== 0) {
