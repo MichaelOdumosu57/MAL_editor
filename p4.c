@@ -112,6 +112,7 @@ int main(int args, char *argv[]) {   //calling files and options
                       y++;
                       
                   }
+                  
                   z++;
                   y = 0;
                   //while (token != NULL){
@@ -166,7 +167,7 @@ int main(int args, char *argv[]) {   //calling files and options
           w =0;
           i++;
           }
-      printf("%s",organizer[0].values);
+      //printf("%s",organizer[0].values);
     
     fclose(finput);
     fclose(foutput);
@@ -186,19 +187,38 @@ int main(int args, char *argv[]) {   //calling files and options
       
     while (fgets(line, MAXLEN, finput) != NULL) {
       int u = 0;
-      
-      printf("%s",line);
-      //printf("%s",organizer[u].name[u]);
-      while( u != 9) {
-        if (strstr(line,organizer[u].name[u])) {
-          strcat(line, organizer[u].values);
-          fputs(line,foutput);
-          break;
+      int h = 0;
+      //printf("%s",line);
+      while(line[h] !=NULL){
+        if(line[h] == '\n') {
+          line[h] = 0;
         }
+        h++;
+      }
+      
+      while( u != 9) {
+        if (strnstr(line,organizer[u].name[u]) != NULL) {
+
+          
+              
+              printf("%s\n",line);
+              int start = strlen(line);
+              fputs(line,foutput);
+              while(start != 34){
+                fputs(" ",foutput);
+                start++;
+              }
+              fputs(organizer[u].values,foutput);
+              fputs("\n",foutput);
+              break;
+          
+        
+      }
       u++;
       }
       if (u == 9) {
           fputs(line,foutput);
+          fputs("\n",foutput);
         }
       
       
