@@ -28,7 +28,7 @@ int main(int args, char *argv[]) {   //calling files and options
         
       }
       
-    else if ((foutput = fopen("draft.txt", "w")) == NULL) {
+    else if ((foutput = fopen(argv[3], "w")) == NULL) {
         
         printf("Could not open file %s for writing.\n", argv[3]);
         exit(1);
@@ -68,7 +68,14 @@ int main(int args, char *argv[]) {   //calling files and options
     }
     
     else if(strcmp(flag,"-c")== 0) {
-      fputs( "Cross Reference table\n", foutput);
+      fclose(foutput);
+      if ((foutput = fopen("draft.txt", "w")) == NULL) {     //check statements for file handling
+        
+        printf("Could not open file %s for writing.\n", "draft.txt");
+        exit(1);
+        
+      }
+      fputs( " Cross Reference table\n", foutput);
       char * header = "     Identifier      Definition      Use";
       fputs(header,foutput);
       int x =0;
@@ -117,7 +124,7 @@ int main(int args, char *argv[]) {   //calling files and options
                   y = 0;
                   //while (token != NULL){
                   fputs("\n",foutput);
-                  fputs("       ",foutput);
+                  //fputs("       ",foutput);
                   fputs(token,foutput);
                   int length = snprintf( NULL, 0, "%d", x );
                   char* str = malloc( length + 1 );
@@ -189,6 +196,16 @@ int main(int args, char *argv[]) {   //calling files and options
       int u = 0;
       int h = 0;
       //printf("%s",line);
+      int k =0;
+      char  section[100]  = "\0"; /* gives {\0, \0} */
+      
+      while(line[k] != ' '){
+        section[k] = line[k];
+        k++;
+      }
+      
+      printf("THIS IS THE SECTION %s\n",section);
+      printf("THIS IS THE LINE WERE WOrking with %s\n",line);
       while(line[h] !=NULL){
         if(line[h] == '\n') {
           line[h] = 0;
@@ -196,12 +213,14 @@ int main(int args, char *argv[]) {   //calling files and options
         h++;
       }
       
+      printf("THIS is the after edit %s\n",line);
+      
+      
       while( u != 9) {
-        if (strnstr(line,organizer[u].name[u]) != NULL) {
+        
+        if (strcmp(section,organizer[u].name[u]) == 0) {
 
-          
-              
-              printf("%s\n",line);
+              //printf("%s\n",line);
               int start = strlen(line);
               fputs(line,foutput);
               while(start != 34){
@@ -226,7 +245,8 @@ int main(int args, char *argv[]) {   //calling files and options
       
       
       
-        
+    fclose(finput);
+    fclose(foutput);
 
         //printf("%s\n",use);
     }
@@ -239,3 +259,6 @@ int main(int args, char *argv[]) {   //calling files and options
     }
   
 }
+
+
+
