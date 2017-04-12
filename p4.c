@@ -4,7 +4,14 @@
 #include <ctype.h>
 #define MAXLEN 81
 
+struct sort_name {
+  char name[100][100];
+  char values[100];
+};
+
+
 int main(int args, char *argv[]) {   //calling files and options
+
 
     FILE* finput, *foutput;          //how c will retrieve the files into the program
     char line[100];                   // to edit the lines in the input file by retrieving them
@@ -21,7 +28,7 @@ int main(int args, char *argv[]) {   //calling files and options
         
       }
       
-    else if ((foutput = fopen(argv[3], "w")) == NULL) {
+    else if ((foutput = fopen("draft.txt", "w")) == NULL) {
         
         printf("Could not open file %s for writing.\n", argv[3]);
         exit(1);
@@ -69,7 +76,7 @@ int main(int args, char *argv[]) {   //calling files and options
       char identifier[100][100];
       int y =0;
       int z =0;
-      
+      struct sort_name organizer[100];
         
       
         while (fgets(line, MAXLEN, finput) != NULL) {
@@ -100,7 +107,8 @@ int main(int args, char *argv[]) {   //calling files and options
                   
                   y = 0;
                   while(token[y] != NULL) {
-                      identifier[z][y] = token[y];
+                      //identifier[z][y] = token[y];
+                      organizer[z].name[z][y] = token[y];
                       y++;
                       
                   }
@@ -138,19 +146,66 @@ int main(int args, char *argv[]) {   //calling files and options
                 }
             }
         }
+        
         int i = 0;
         int w = 0;
         while( i != 25) {
           while (w != 9) {
-            if (strstr(count[i],identifier[w])) {
-               printf("%s index %d: line %d\n", identifier[w], w, i);
+            if (strstr(count[i],organizer[w].name[w])) {
+               //printf("%s : line %d\n", organizer[w].name[w],  i);
+               int length = snprintf( NULL, 0, "%d", i );
+               char* str = malloc( length + 1 );
+               snprintf( str, length + 1, "%d", i );
+               strcat(organizer[w].values,str);
+               free(str);
+               strcat(organizer[w].values,"  ");
+            
             }
             w++;
           }
           w =0;
           i++;
           }
+      printf("%s",organizer[0].values);
+    
+    fclose(finput);
+    fclose(foutput);
+    if ((finput = fopen("draft.txt", "r")) == NULL) {     //check statements for file handling
         
+        printf("Could not open file %s for reading.\n", argv[3]);
+        exit(1);
+        
+      }
+      
+    else if ((foutput = fopen(argv[3], "w+")) == NULL) {
+        
+        printf("Could not open file %s for writing.\n", argv[3]);
+        exit(1);
+        
+      }
+      
+    while (fgets(line, MAXLEN, finput) != NULL) {
+      int u = 0;
+      
+      printf("%s",line);
+      //printf("%s",organizer[u].name[u]);
+      while( u != 9) {
+        if (strstr(line,organizer[u].name[u])) {
+          strcat(line, organizer[u].values);
+          fputs(line,foutput);
+          break;
+        }
+      u++;
+      }
+      if (u == 9) {
+          fputs(line,foutput);
+        }
+      
+      
+    }
+      
+      
+      
         
 
         //printf("%s\n",use);
