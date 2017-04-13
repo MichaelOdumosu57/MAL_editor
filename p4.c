@@ -1,3 +1,15 @@
+/*
+
+Name: Michael Odumosu
+Unix login id: mo422733
+Lab Instructor Name: Julia Turner
+Lab Day: Friday
+Lab Time: 1:40pm
+
+Project Description : this program takes in any given MAL file and has options for the user. The program can make a numbered list out of the file, only skipping when there is nothing in line. The program can print a cross reference table listing every identifer in the file as well as where it is declared and all the number lines it is used in the program indicated by the operand field, numbered with the number system, used to make the numbered list mentioned earlier. Also this program can do both, printing first the numbered list, then the cross reference table to the file
+*/
+
+
 #include <stdlib.h>   //calling libraries
 #include <string.h>
 #include <stdio.h>
