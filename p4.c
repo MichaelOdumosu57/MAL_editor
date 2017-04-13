@@ -6,7 +6,7 @@
 
 struct sort_name {
   char name[100][100];
-  char values[100];
+  char  values[100];
 };
 
 
@@ -75,16 +75,15 @@ int main(int args, char *argv[]) {   //calling files and options
         exit(1);
         
       }
-      fputs( " Cross Reference table\n", foutput);
-      char * header = "     Identifier      Definition      Use";
-      fputs(header,foutput);
       int x =0;
       char count[100][100];
       char identifier[100][100];
       int y =0;
       int z =0;
       struct sort_name organizer[100];
-        
+      char * title = " Cross Reference table";      //as required in assignment
+      char * header = "     Identifier      Definition      Use";
+
       
         while (fgets(line, MAXLEN, finput) != NULL) {
             
@@ -120,47 +119,43 @@ int main(int args, char *argv[]) {   //calling files and options
                       
                   }
                   
-                  z++;
+                  
                   y = 0;
                   //while (token != NULL){
                   fputs("\n",foutput);
                   //fputs("       ",foutput);
-                  fputs(token,foutput);
+                  while(token[y] != NULL) {
+                      //identifier[z][y] = token[y];
+                      organizer[z].values[y] = token[y];
+                      y++;
+                      
+                  }
+                  
+                  
+                  y = 0;
+                  printf("%s\n",organizer[z].values);
+                  z++;
                   int length = snprintf( NULL, 0, "%d", x );
                   char* str = malloc( length + 1 );
                   snprintf( str, length + 1, "%d", x );
                   int start = strlen(token) + 8;
-                  while(start != 26){
+                  while(start != 26){                   //loop that format the lines
                       fputs(" ",foutput);
                       start++;
                   }
                   fputs(str,foutput);
                   free(str);
-                  //printf("%c\n",line[26]);
 
-
-                    //printf("%s",token);
-                    // if (strstr(use,token) ){
-                    //   strcat(count,str);
-                    //   }
-                    
-                
-                  
-                  
-                
-                    //token = strtok(NULL, stop);
-                  
-                  //fputs(line,foutput);
                 }
             }
         }
         
         int i = 0;
         int w = 0;
-        while( i != 25) {
-          while (w != 9) {
+        while( i != x) {                         //loop to get were variable is used
+          while (strlen(organizer[w].name[w]) != 0) {
             if (strstr(count[i],organizer[w].name[w])) {
-               //printf("%s : line %d\n", organizer[w].name[w],  i);
+
                int length = snprintf( NULL, 0, "%d", i );
                char* str = malloc( length + 1 );
                snprintf( str, length + 1, "%d", i );
@@ -193,27 +188,27 @@ int main(int args, char *argv[]) {   //calling files and options
       }
       
     while (fgets(line, MAXLEN, finput) != NULL) {
-      int u = 0;
-      int h = 0;
+      int u = 0;       //used to go through the struct array to go through variable matches
+      int h = 0;       //newline removal counter
       //printf("%s",line);
-      int k =0;
-      char  section[100]  = "\0"; /* gives {\0, \0} */
+      int k =0;         //word strip counter of line for strcmp to refer the line to the variable
       
+      char  section[100]  = "\0"; // this made sure strcmp had the complete word to check
       while(line[k] != ' '){
         section[k] = line[k];
         k++;
       }
       
-      printf("THIS IS THE SECTION %s\n",section);
-      printf("THIS IS THE LINE WERE WOrking with %s\n",line);
+      //printf("THIS IS THE SECTION %s\n",section);
+      //printf("THIS IS THE LINE WERE WOrking with %s\n",line);
       while(line[h] !=NULL){
-        if(line[h] == '\n') {
+        if(line[h] == '\n') {  //this removes the newline so we can add the use values later
           line[h] = 0;
         }
         h++;
       }
       
-      printf("THIS is the after edit %s\n",line);
+      //printf("THIS is the after edit %s\n",line);
       
       
       while( u != 9) {
