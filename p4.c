@@ -112,9 +112,10 @@ int main(int args, char *argv[]) {   //calling files and options
                   token = strtok(line,stop);
                   
                   y = 0;
-                  while(token[y] != NULL) {
+                  while(token[y] != NULL) {     //places the variable insides the line and compare string
                       //identifier[z][y] = token[y];
                       organizer[z].name[z][y] = token[y];
+                      organizer[z].values[y] = token[y];
                       y++;
                       
                   }
@@ -124,27 +125,27 @@ int main(int args, char *argv[]) {   //calling files and options
                   //while (token != NULL){
                   fputs("\n",foutput);
                   //fputs("       ",foutput);
-                  while(token[y] != NULL) {
-                      //identifier[z][y] = token[y];
-                      organizer[z].values[y] = token[y];
-                      y++;
-                      
-                  }
+
                   
                   
-                  y = 0;
-                  printf("%s\n",organizer[z].values);
-                  z++;
                   int length = snprintf( NULL, 0, "%d", x );
                   char* str = malloc( length + 1 );
                   snprintf( str, length + 1, "%d", x );
-                  int start = strlen(token) + 8;
+                  int start = strlen(token);
                   while(start != 26){                   //loop that format the lines
-                      fputs(" ",foutput);
+                      organizer[z].values[start] = ' ';
                       start++;
                   }
-                  fputs(str,foutput);
+
+                  while(str[y] != NULL) {
+                    organizer[z].values[start+y] = str[y];
+                    y++;
+                  }
+                  //printf("%d\n",strlen(organizer[z].values));
+                  //printf("%s\n",organizer[z].values);
                   free(str);
+                  z++;
+                  y = 0;
 
                 }
             }
@@ -159,9 +160,10 @@ int main(int args, char *argv[]) {   //calling files and options
                int length = snprintf( NULL, 0, "%d", i );
                char* str = malloc( length + 1 );
                snprintf( str, length + 1, "%d", i );
+               strcat(organizer[w].values,"  ");
                strcat(organizer[w].values,str);
                free(str);
-               strcat(organizer[w].values,"  ");
+      printf("%s\n",organizer[w].values);
             
             }
             w++;
