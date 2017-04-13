@@ -143,15 +143,22 @@ void crt_function(FILE * finput, FILE *foutput) {  //function  for the cross ref
                 }
                 
                 int o = 0;
+                int op =0;
                 while(line[o] != NULL ) {
-                    if (isspace(line[o]) != 0) {
-                        strcpy(identifier[x], line+o );
+                    if (isspace(line[o]) != 0 && op == 0) {
+                        op = o;
+                    }
+                    else if (line[o] == '#') {
+                        strncpy(identifier[x],line+op,o-op);
                         break;
+                    }
+                    else {
+                      strncpy(identifier[x],line+op,o-op);
                     }
                     o++;
                 }
                 //printf("%s\n",count[x]);
-                printf("%s",identifier[x]);
+                printf("%s\n",identifier[x]);
 
                 //printf("line %s\n start : %d\n end %d\n",use, op,ot);
           
