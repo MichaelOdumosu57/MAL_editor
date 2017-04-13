@@ -4,14 +4,14 @@
 #include <ctype.h>
 #define MAXLEN 81
 
-struct sort_name {
-  char name[100][100];
+struct sort_name {                  //the structs that will be holding the lines for appending the use values during
+  char name[100][100];              //the crt function
   char  values[100];
 };
 
-void crt_function(FILE * , FILE *);
-void list_function(FILE * , FILE *);
-int main(int args, char *argv[]) {   //calling files and options
+void crt_function(FILE * , FILE *); //function prototype for the cross reference table
+void list_function(FILE * , FILE *);//function prototype for making a numbered list out of the MAL code
+int main(int args, char *argv[]) {   //receiving command line arguments
 
 
     FILE* fin, *fout;          //how c will retrieve the files into the program
@@ -47,31 +47,31 @@ int main(int args, char *argv[]) {   //calling files and options
   
     }
     
-    else if(strcmp(flag,"-c")== 0) {
+    else if(strcmp(flag,"-c")== 0) { //conditional to print cross reference table
 
         crt_function(fin, fout);
     }
       
-    else if(strcmp(flag,"-b")== 0) {
+    else if(strcmp(flag,"-b")== 0) { //conditional to pring everything
       
 
         list_function(fin, fout);
         fputs("\n", fout);
         fputs("\n", fout);
-        fseek(fin,0L, SEEK_SET);
+        fseek(fin,0L, SEEK_SET);      //using fseek() like this rewinds the file back to beginning for re-reading
         crt_function(fin, fout);
     }
   
 }
 
-void list_function(FILE * finput, FILE *foutput) {
+void list_function(FILE * finput, FILE *foutput) {      //function  for making a numbered list out of the MAL code
           int x = 1;
-          char  line[MAXLEN];
+          char  line[MAXLEN];                               //if line is in function, gcc thinks its undefined
           while (fgets(line, MAXLEN, finput) != NULL) {
               //printf(" %d     %d\n",x,strlen(line));
               if (strlen(line) != 1) {
                 
-                int length = snprintf( NULL, 0, "%d", x );
+                int length = snprintf( NULL, 0, "%d", x );  //chaging an int to a string so i can prepend to the line
                 char* str = malloc( length + 1 );
                 snprintf( str, length + 1, "%d", x );
                 strcat(str , "  ");
@@ -92,30 +92,30 @@ void list_function(FILE * finput, FILE *foutput) {
   
 }
 
-void crt_function(FILE * finput, FILE *foutput) {
+void crt_function(FILE * finput, FILE *foutput) {  //function  for the cross reference table
       int x =0;
-      char count[100][100];
+      char count[100][100];                     //used to find the lines were the variables is used in the string
       char identifier[100][100];
-      int y =0;
+      int y =0;                                 //counter used when working with string arrays
       int z =0;
-      struct sort_name organizer[100];
-      char * title = " Cross Reference table";      //as required in assignment
+      struct sort_name organizer[100];          //holds edited output file, wating for use values to be added to lines
+      char * title = " Cross Reference table";
       char * header = "     Identifier      Definition      Use";
       char  line[MAXLEN];
-      fputs(title,foutput);
+      fputs(title,foutput);                      //headers for cross reference table as required in assignment
       fputs("\n",foutput);
       fputs("\n",foutput);
       fputs(header,foutput);
       fputs("\n",foutput);
       fputs("\n",foutput);
       
-        while (fgets(line, MAXLEN, finput) != NULL) {
+        while (fgets(line, MAXLEN, finput) != NULL) {  //this loops gets the identifier and definiton
             
             if (strlen(line) != 1) {
               
                 x++;
                 char use[23];
-                if(isspace(line[27]) == 0){
+                if(isspace(line[27]) == 0){            //this gets the operand field only
                   
                   strncpy(use,  line + 26, 43 -26);
                   int y = 0;
@@ -128,8 +128,8 @@ void crt_function(FILE * finput, FILE *foutput) {
                   
                 }
           
-                if (line[0] != '#' && isspace(line[0])  == 0  ) {
-                  //printf("%c\n", line[0]);
+                if (line[0] != '#' && isspace(line[0])  == 0  ) {  //checks if line[0] or a comment
+                  //printf("%c\n", line[0]);                      // or line with no identifer, then it proceeds
                   
                   const char stop[2] =":";
                   char * token;
@@ -151,7 +151,7 @@ void crt_function(FILE * finput, FILE *foutput) {
 
                   
                   
-                  int length = snprintf( NULL, 0, "%d", x );
+                  int length = snprintf( NULL, 0, "%d", x );  //changes int to string
                   char* str = malloc( length + 1 );
                   snprintf( str, length + 1, "%d", x );
                   int start = strlen(token);
@@ -197,7 +197,7 @@ void crt_function(FILE * finput, FILE *foutput) {
           }
       //printf("%s",organizer[0].values);
     
-    int g =0;
+    int g =0;    //main counter that helps find occurence of identifier in the deinition
 
     
     // while (strcmp(organizer[g].values," ") != 0) {
@@ -238,7 +238,7 @@ void crt_function(FILE * finput, FILE *foutput) {
       
       while( strlen(organizer[u].values) != 0) {
 
-        if (strcmp(section,organizer[u].name[u]) == 0) {
+        if (strcmp(section,organizer[u].name[u]) == 0) { //checks if identifer is in use, prints it back to the file
 
               //printf("%s\n",line);
 
@@ -266,7 +266,7 @@ void crt_function(FILE * finput, FILE *foutput) {
       
       
       
-    fclose(finput);
+    fclose(finput);       //closes file so user can view later
     fclose(foutput);
       
 }
