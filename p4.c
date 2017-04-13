@@ -127,6 +127,8 @@ void crt_function(FILE * finput, FILE *foutput) {  //function  for the cross ref
               
                 x++;
                 char use[23];
+
+                //printf("%s\n",line);
                 if(isspace(line[27]) == 0){            //this gets the operand field only
                   
                   strncpy(use,  line + 26, 43 -26);
@@ -139,6 +141,19 @@ void crt_function(FILE * finput, FILE *foutput) {  //function  for the cross ref
                   //printf("%s",count[x]);
                   
                 }
+                
+                int o = 0;
+                while(line[o] != NULL ) {
+                    if (isspace(line[o]) != 0) {
+                        strcpy(identifier[x], line+o );
+                        break;
+                    }
+                    o++;
+                }
+                //printf("%s\n",count[x]);
+                printf("%s",identifier[x]);
+
+                //printf("line %s\n start : %d\n end %d\n",use, op,ot);
           
                 if (line[0] != '#' && isspace(line[0])  == 0  ) {  //checks if line[0] or a comment
                   //printf("%c\n", line[0]);                      // or line with no identifer, then it proceeds
