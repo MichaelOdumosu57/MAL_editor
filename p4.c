@@ -77,7 +77,9 @@ int main(int args, char *argv[]) {   //calling files and options
       struct sort_name organizer[100];
       char * title = " Cross Reference table";      //as required in assignment
       char * header = "     Identifier      Definition      Use";
-
+      fputs(title,foutput);
+      fputs("\n",foutput);
+      fputs(header,foutput);
       
         while (fgets(line, MAXLEN, finput) != NULL) {
             
@@ -168,49 +170,61 @@ int main(int args, char *argv[]) {   //calling files and options
       //printf("%s",organizer[0].values);
     
     int g =0;
-    while(strlen(organizer[g].name[g]) != 0) {
-      printf("%s\n",organizer[g].values);
-      g++;
-    }
+    puts("hit a bug bad check");
+    
+    // while (strcmp(organizer[g].values," ") != 0) {
+    while(strlen(organizer[g].values) != 0) {
+      puts("starting to assign things");
 
-      
-    /*while (fgets(line, MAXLEN, finput) != NULL) {
       int u = 0;       //used to go through the struct array to go through variable matches
       int h = 0;       //newline removal counter
       //printf("%s",line);
       int k =0;         //word strip counter of line for strcmp to refer the line to the variable
       
-      char  section[100]  = "\0"; // this made sure strcmp had the complete word to check
-      while(line[k] != ' '){
-        section[k] = line[k];
+      char * puller; // this made sure strcmp had the complete word to check
+      // while(organizer[g].values[k] != ' '){
+      //   section[k] = organizer[g].values[k];
+      //   k++;
+      // }
+      puller = organizer[g].values;
+      char section[100];
+      while(puller[k] != ' '){
+        section[k] = puller[k];
         k++;
       }
-      
+
+      printf("stripped first word from line %s\n", section);
+      puts("got the section");
       //printf("THIS IS THE SECTION %s\n",section);
       //printf("THIS IS THE LINE WERE WOrking with %s\n",line);
-      while(line[h] !=NULL){
-        if(line[h] == '\n') {  //this removes the newline so we can add the use values later
-          line[h] = 0;
+      while(puller[h] !=NULL){
+        if(puller[h] == '\n') {  //this removes the newline so we can add the use values later
+          puller[h] = 0;
         }
         h++;
       }
+      puts("there should be no newline");
       
       //printf("THIS is the after edit %s\n",line);
       
       
       while( u != 9) {
-        
+        puts("checking off these strings");
         if (strcmp(section,organizer[u].name[u]) == 0) {
-
+              puts("so the organizer name string knows when to end");
               //printf("%s\n",line);
-              int start = strlen(line);
+              int start = strlen(organizer[g].values);
+              printf("this is how long your string is %d\n", start);
               fputs("      ",foutput);
-              fputs(line,foutput);
-              while(start != 30){
+              fputs(organizer[g].values,foutput);
+              puts("so i wrote to the file");
+              while(start != 60){
                 fputs(" ",foutput);
                 start++;
               }
-              fputs(organizer[u].values,foutput);
+
+
+              puts("found my  problem");
               fputs("\n",foutput);
               break;
           
@@ -223,14 +237,14 @@ int main(int args, char *argv[]) {   //calling files and options
           fputs("\n",foutput);
         }
       
-      
-    }*/
+    g++;
+    }
       
       
       
     fclose(finput);
     fclose(foutput);
-
+    return 0;
         //printf("%s\n",use);
     }
       
@@ -449,3 +463,4 @@ int main(int args, char *argv[]) {   //calling files and options
 
 
 
+  

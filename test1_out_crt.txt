@@ -1,3 +1,5 @@
+ Cross Reference table
+     Identifier      Definition      Use
 
 
 
@@ -6,4 +8,18 @@
 
 
 
+      avg                       3  17  19  21                     
+              done                         #Similar to halt.
+
+              done                         #Similar to halt.
+
+              done                         #Similar to halt.
+
+      prompt                    7  18                             
+              done                         #Similar to halt.
+
+      __start                   10                                
+              done                         #Similar to halt.
+
+              done                         #Similar to halt.
 
