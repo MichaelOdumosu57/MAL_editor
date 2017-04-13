@@ -41,7 +41,10 @@ int main(int args, char *argv[]) {   //calling files and options
       printf("%s\n", argv[1]);
       printf("%s\n", argv[2]);
       
-      list_function(fin, fout);
+
+        list_function(fin, fout);
+        fclose(fin);                 // crt_function doesnt need it since its the last thing the file receives,
+        fclose(fout);               // placed the close statements in the function
   
     }
     
@@ -51,7 +54,13 @@ int main(int args, char *argv[]) {   //calling files and options
     }
       
     else if(strcmp(flag,"-b")== 0) {
+      
 
+        list_function(fin, fout);
+        fputs("\n", fout);
+        fputs("\n", fout);
+        fseek(fin,0L, SEEK_SET);
+        crt_function(fin, fout);
     }
   
 }
@@ -228,7 +237,7 @@ void crt_function(FILE * finput, FILE *foutput) {
       //printf("THIS is the after edit %s\n",line);
       
       
-      while( u != 9) {
+      while( strlen(organizer[u].values) != 0) {
         puts("checking off these strings");
         if (strcmp(section,organizer[u].name[u]) == 0) {
               puts("so the organizer name string knows when to end");
