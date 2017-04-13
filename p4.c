@@ -79,7 +79,10 @@ int main(int args, char *argv[]) {   //calling files and options
       char * header = "     Identifier      Definition      Use";
       fputs(title,foutput);
       fputs("\n",foutput);
+      fputs("\n",foutput);
       fputs(header,foutput);
+      fputs("\n",foutput);
+      fputs("\n",foutput);
       
         while (fgets(line, MAXLEN, finput) != NULL) {
             
@@ -119,7 +122,6 @@ int main(int args, char *argv[]) {   //calling files and options
                   
                   y = 0;
                   //while (token != NULL){
-                  fputs("\n",foutput);
                   //fputs("       ",foutput);
 
                   
@@ -128,7 +130,7 @@ int main(int args, char *argv[]) {   //calling files and options
                   char* str = malloc( length + 1 );
                   snprintf( str, length + 1, "%d", x );
                   int start = strlen(token);
-                  while(start != 26){                   //loop that format the lines
+                  while(start != 20){                   //loop that format the lines
                       organizer[z].values[start] = ' ';
                       start++;
                   }
@@ -137,6 +139,7 @@ int main(int args, char *argv[]) {   //calling files and options
                     organizer[z].values[start+y] = str[y];
                     y++;
                   }
+                  strcat(organizer[z].values,"        ");
                   //printf("%d\n",strlen(organizer[z].values));
                   //printf("%s\n",organizer[z].values);
                   free(str);
@@ -156,7 +159,7 @@ int main(int args, char *argv[]) {   //calling files and options
                int length = snprintf( NULL, 0, "%d", i );
                char* str = malloc( length + 1 );
                snprintf( str, length + 1, "%d", i );
-               strcat(organizer[w].values,"  ");
+               strcat(organizer[w].values," ");
                strcat(organizer[w].values,str);
                free(str);
       //printf("%s\n",organizer[w].values);
@@ -187,7 +190,7 @@ int main(int args, char *argv[]) {   //calling files and options
       //   k++;
       // }
       puller = organizer[g].values;
-      char section[100];
+      char section[100] = "\0";
       while(puller[k] != ' '){
         section[k] = puller[k];
         k++;
@@ -213,15 +216,14 @@ int main(int args, char *argv[]) {   //calling files and options
         if (strcmp(section,organizer[u].name[u]) == 0) {
               puts("so the organizer name string knows when to end");
               //printf("%s\n",line);
-              int start = strlen(organizer[g].values);
-              printf("this is how long your string is %d\n", start);
+
               fputs("      ",foutput);
               fputs(organizer[g].values,foutput);
               puts("so i wrote to the file");
-              while(start != 60){
-                fputs(" ",foutput);
-                start++;
-              }
+              // while(start != 0){
+              //   fputs(" ",foutput);
+              //   start++;
+              // }
 
 
               puts("found my  problem");
@@ -232,10 +234,7 @@ int main(int args, char *argv[]) {   //calling files and options
       }
       u++;
       }
-      if (u == 9) {
-          fputs(line,foutput);
-          fputs("\n",foutput);
-        }
+
       
     g++;
     }
