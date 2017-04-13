@@ -68,13 +68,7 @@ int main(int args, char *argv[]) {   //calling files and options
     }
     
     else if(strcmp(flag,"-c")== 0) {
-      fclose(foutput);
-      if ((foutput = fopen("draft.txt", "w")) == NULL) {     //check statements for file handling
-        
-        printf("Could not open file %s for writing.\n", "draft.txt");
-        exit(1);
-        
-      }
+
       int x =0;
       char count[100][100];
       char identifier[100][100];
@@ -163,7 +157,7 @@ int main(int args, char *argv[]) {   //calling files and options
                strcat(organizer[w].values,"  ");
                strcat(organizer[w].values,str);
                free(str);
-      printf("%s\n",organizer[w].values);
+      //printf("%s\n",organizer[w].values);
             
             }
             w++;
@@ -173,23 +167,14 @@ int main(int args, char *argv[]) {   //calling files and options
           }
       //printf("%s",organizer[0].values);
     
-    fclose(finput);
-    fclose(foutput);
-    if ((finput = fopen("draft.txt", "r")) == NULL) {     //check statements for file handling
-        
-        printf("Could not open file %s for reading.\n", argv[3]);
-        exit(1);
-        
-      }
+    int g =0;
+    while(strlen(organizer[g].name[g]) != 0) {
+      printf("%s\n",organizer[g].values);
+      g++;
+    }
+
       
-    else if ((foutput = fopen(argv[3], "w+")) == NULL) {
-        
-        printf("Could not open file %s for writing.\n", argv[3]);
-        exit(1);
-        
-      }
-      
-    while (fgets(line, MAXLEN, finput) != NULL) {
+    /*while (fgets(line, MAXLEN, finput) != NULL) {
       int u = 0;       //used to go through the struct array to go through variable matches
       int h = 0;       //newline removal counter
       //printf("%s",line);
@@ -239,7 +224,7 @@ int main(int args, char *argv[]) {   //calling files and options
         }
       
       
-    }
+    }*/
       
       
       
