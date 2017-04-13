@@ -76,7 +76,13 @@ int main(int args, char *argv[]) {   //receiving command line arguments
   
 }
 
-void list_function(FILE * finput, FILE *foutput) {      //function  for making a numbered list out of the MAL code
+void list_function(FILE * finput, FILE *foutput) {
+  /*this function handles the list converison of the MAL file.
+    In this function a counter is given . If a line has characters
+    in it the counter increments and is turned to a string. then the
+    line is append to the counter  string and written back to the file.
+  
+  */
           int x = 1;
           char  line[MAXLEN];                               //if line is in function, gcc thinks its undefined
           while (fgets(line, MAXLEN, finput) != NULL) {
@@ -104,7 +110,13 @@ void list_function(FILE * finput, FILE *foutput) {      //function  for making a
   
 }
 
-void crt_function(FILE * finput, FILE *foutput) {  //function  for the cross reference table
+void crt_function(FILE * finput, FILE *foutput) {
+  /*this function handles everything concerning the cross reference table
+    conversion from the inital mal file, in the function several counter variables
+    and holder strings arrays are made as well as a sturct array  is made in order
+    to retrieve every identifier along with the definition and every line where where
+    the identifer is used.
+  */
       int x =0;
       char count[100][100];                     //used to find the lines were the variables is used in the string
       char identifier[100][100];                //made like this becuase seg falut occurs
