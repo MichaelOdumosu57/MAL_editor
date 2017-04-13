@@ -130,15 +130,15 @@ void crt_function(FILE * finput, FILE *foutput) {  //function  for the cross ref
 
                 //printf("%s\n",line);
 
-                int y =0;
+                int y =0;                                   //use counter variables
                 int o = 0;
                 int op =0;
-                puts("entering this loop");
+                //puts("entering this loop");
                 while(line[o] != NULL ) {                     //algorithm used to find uses of identifer in code
                     if (isspace(line[o]) != 0 && op == 0) {
 
                         op = o;
-                    printf("%d %d\n",o,op);
+                    //printf("%d %d\n",o,op);
                     }
                     else if (line[o] == '#') {
                         strncpy(identifier[x],line+op,o-op);
@@ -146,12 +146,12 @@ void crt_function(FILE * finput, FILE *foutput) {  //function  for the cross ref
                     }
                     else {
                       strncpy(identifier[x],line+op,o-op);
-                      printf("%s",identifier);
+                      //printf("%s",identifier);
                     }
                     o++;
                 }
                 //printf("%s\n",count[x]);
-                printf("%s\n",identifier[x]);
+                //printf("%s\n",identifier[x]);
 
                 //printf("line %s\n start : %d\n end %d\n",use, op,ot);
           
