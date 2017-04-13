@@ -14,7 +14,7 @@
 13                lw          $16,i3           #$16 contains 82.
 14                add         $15,$15,$16      #$15 contains the sum (115).
 15                li          $16,3            #$16 contains 3.
-16  i19:          div         $15,$15,$16      #$15 contains the average (38).
+16                div         $15,$15,$16      #$15 contains the average (38).
 17  i20:          sw          $15,avg          #Store the average.
 18                puts        prompt
 19                put         avg
@@ -23,5 +23,5 @@
 21                sw          $15,avg
 22                la          $16,i1
 23                sw          $15,0($16)
-24                add         i3,i3,1,i19
+24                add         i3,i3,1
 25                done                         #Similar to halt.

@@ -107,7 +107,7 @@ void list_function(FILE * finput, FILE *foutput) {      //function  for making a
 void crt_function(FILE * finput, FILE *foutput) {  //function  for the cross reference table
       int x =0;
       char count[100][100];                     //used to find the lines were the variables is used in the string
-      char identifier[100][100];
+      char identifier[100][100];                //made like this becuase seg falut occurs
       int y =0;                                 //counter used when working with string arrays
       int z =0;
       struct sort_name organizer[100];          //holds edited output file, wating for use values to be added to lines
@@ -129,24 +129,16 @@ void crt_function(FILE * finput, FILE *foutput) {  //function  for the cross ref
                 char use[23];
 
                 //printf("%s\n",line);
-                if(isspace(line[27]) == 0){            //this gets the operand field only
-                  
-                  strncpy(use,  line + 26, 43 -26);
-                  int y = 0;
-                  while(use[y] != NULL) {
-                      count[x][y] = use[y];
-                      y++;
-                  }
-                  
-                  //printf("%s",count[x]);
-                  
-                }
-                
+
+                int y =0;
                 int o = 0;
                 int op =0;
-                while(line[o] != NULL ) {
+                puts("entering this loop");
+                while(line[o] != NULL ) {                     //algorithm used to find uses of identifer in code
                     if (isspace(line[o]) != 0 && op == 0) {
+
                         op = o;
+                    printf("%d %d\n",o,op);
                     }
                     else if (line[o] == '#') {
                         strncpy(identifier[x],line+op,o-op);
@@ -154,6 +146,7 @@ void crt_function(FILE * finput, FILE *foutput) {  //function  for the cross ref
                     }
                     else {
                       strncpy(identifier[x],line+op,o-op);
+                      printf("%s",identifier);
                     }
                     o++;
                 }
@@ -213,7 +206,7 @@ void crt_function(FILE * finput, FILE *foutput) {  //function  for the cross ref
         int w = 0;
         while( i != x) {                         //loop to get were variable is used
           while (strlen(organizer[w].name[w]) != 0) {
-            if (strstr(count[i],organizer[w].name[w])) {
+            if (strstr(identifier[i],organizer[w].name[w])) {
 
                int length = snprintf( NULL, 0, "%d", i );
                char* str = malloc( length + 1 );
