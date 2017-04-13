@@ -25,7 +25,6 @@
 23                sw          $15,0($16)
 24                add         i3,i3,1,i19
 25                done                         #Similar to halt.
-26               ''
 
  Cross Reference table
 

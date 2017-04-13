@@ -3,11 +3,12 @@
      Identifier      Definition      Use
 
       avg                 3         17 19 21
-      i1                  4         10 22
+      i1                  4         10 22 24
       i2                  5         11
       i3                  6         13 24
       prompt              7         18
       nl                  8         20
       __start             10        
       i10                 12        
+      i19                 16         24
       i20                 17        

@@ -25,4 +25,3 @@ i20:          sw          $15,avg          #Store the average.
               sw          $15,0($16)
               add         i3,i3,1,i19
               done                         #Similar to halt.
-             ''

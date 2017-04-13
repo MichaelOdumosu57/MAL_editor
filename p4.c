@@ -38,8 +38,7 @@ int main(int args, char *argv[]) {   //calling files and options
       
       
     if(strcmp(flag,"-l")== 0) {       //conditional to print number list
-      printf("%s\n", argv[1]);
-      printf("%s\n", argv[2]);
+
       
 
         list_function(fin, fout);
@@ -199,11 +198,11 @@ void crt_function(FILE * finput, FILE *foutput) {
       //printf("%s",organizer[0].values);
     
     int g =0;
-    puts("hit a bug bad check");
+
     
     // while (strcmp(organizer[g].values," ") != 0) {
     while(strlen(organizer[g].values) != 0) {
-      puts("starting to assign things");
+      
 
       int u = 0;       //used to go through the struct array to go through variable matches
       int h = 0;       //newline removal counter
@@ -222,8 +221,8 @@ void crt_function(FILE * finput, FILE *foutput) {
         k++;
       }
 
-      printf("stripped first word from line %s\n", section);
-      puts("got the section");
+
+
       //printf("THIS IS THE SECTION %s\n",section);
       //printf("THIS IS THE LINE WERE WOrking with %s\n",line);
       while(puller[h] !=NULL){
@@ -232,27 +231,27 @@ void crt_function(FILE * finput, FILE *foutput) {
         }
         h++;
       }
-      puts("there should be no newline");
+
       
       //printf("THIS is the after edit %s\n",line);
       
       
       while( strlen(organizer[u].values) != 0) {
-        puts("checking off these strings");
+
         if (strcmp(section,organizer[u].name[u]) == 0) {
-              puts("so the organizer name string knows when to end");
+
               //printf("%s\n",line);
 
               fputs("      ",foutput);
               fputs(organizer[g].values,foutput);
-              puts("so i wrote to the file");
+
               // while(start != 0){
               //   fputs(" ",foutput);
               //   start++;
               // }
 
 
-              puts("found my  problem");
+
               fputs("\n",foutput);
               break;
           
