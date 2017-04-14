@@ -27,10 +27,8 @@ int main(int args, char *argv[]) {   //receiving command line arguments
 
 
     FILE* fin, *fout;          //how c will retrieve the files into the program
-    char line[100];                   // to edit the lines in the input file by retrieving them
     char flag[4];                    // holds flag (option), edit here if you need to change it
-    char input[30];
-    char output[30];
+
     
     
     strcpy(flag,argv[1]);
@@ -74,6 +72,7 @@ int main(int args, char *argv[]) {   //receiving command line arguments
         crt_function(fin, fout);
     }
   
+  return 0;
 }
 
 void list_function(FILE * finput, FILE *foutput) {
@@ -84,7 +83,7 @@ void list_function(FILE * finput, FILE *foutput) {
   
   */
           int x = 1;
-          char  line[MAXLEN];                               //if line is in function, gcc thinks its undefined
+          char  line[MAXLEN];               //if line is in function, gcc thinks its undefined
           while (fgets(line, MAXLEN, finput) != NULL) {
               //printf(" %d     %d\n",x,strlen(line));
               if (strlen(line) != 1) {
@@ -118,14 +117,12 @@ void crt_function(FILE * finput, FILE *foutput) {
     the identifer is used.
   */
       int x =0;
-      char count[100][100];                     //used to find the lines were the variables is used in the string
       char identifier[100][100];                //made like this becuase seg falut occurs
-      int y =0;                                 //counter used when working with string arrays
       int z =0;
       struct sort_name organizer[100];          //holds edited output file, wating for use values to be added to lines
       char * title = " Cross Reference table";
       char * header = "     Identifier      Definition      Use";
-      char  line[MAXLEN];
+      char  line[MAXLEN];                       //to retrieve lines from list
       fputs(title,foutput);                      //headers for cross reference table as required in assignment
       fputs("\n",foutput);
       fputs("\n",foutput);
@@ -138,11 +135,9 @@ void crt_function(FILE * finput, FILE *foutput) {
             if (strlen(line) != 1) {
               
                 x++;
-                char use[23];
-
                 //printf("%s\n",line);
 
-                int y =0;                                   //use counter variables
+                int y =0;                           //counter used when working with string arrays
                 int o = 0;
                 int op =0;
                 //puts("entering this loop");
